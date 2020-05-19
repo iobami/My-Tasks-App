@@ -75,15 +75,17 @@ const task = StyleSheet.create({
     container: {
         flex: 1,
         padding: 18,
-        backgroundColor: '#FFFFF1',
+        backgroundColor: '#fdfaff',
     },
     content: {
         marginTop: 5,
         padding: 12,
+        color: '#321e45',
     },
     contentTitle: {
         fontSize: 24,
         padding: 6,
+        color: '#321e45',
     },
     contentSummary: {
         fontSize: 12,

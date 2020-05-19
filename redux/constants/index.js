@@ -1,4 +1,4 @@
-export const COUNTER_CHANGE = 'COUNTER_CHANGE';
+export const TASK_ID_COUNTER = 'TASK_ID_COUNTER';
 
 export const SET_TASK = 'SET_TASK';
 

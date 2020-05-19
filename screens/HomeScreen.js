@@ -6,6 +6,7 @@ import { connect, useSelector } from 'react-redux';
 import { FAB } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
 import { getData } from '../services/localStorage';
+import { changeCount } from '../redux/actions/counts';
 import { setAllTasks } from '../redux/actions/allTasks';
 
 // import db from '../db/tasks';
@@ -19,11 +20,17 @@ const goToTask = (navigation, name, task) => {
     });
 };
 
-const AddTaskBtn = ({ nav, name, task }) => (
+const AddTaskBtn = ({ nav, name, dispatch, taskId }) => (
     <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => goToTask(nav, name, task)}
+        onPress={() => {
+            const task = {
+                id: `${taskId}`,
+            };
+            dispatch(changeCount(taskId + 1));
+            goToTask(nav, name, task)
+        }}
     />
 );
 
@@ -56,6 +63,8 @@ function HomeScreen({ navigation, dispatch }) {
 
     const taskObject = useSelector(state => state);
     const { allTasks: db } = taskObject.allTasks;
+    const { count } = taskObject.count;
+    console.log(count);
 
     // const [db, setDb] = React.useState([]);
 
@@ -102,9 +111,8 @@ function HomeScreen({ navigation, dispatch }) {
             <AddTaskBtn
                 nav={navigation}
                 name={'Task'}
-                task={{
-                    id: '401',
-                }}
+                dispatch={dispatch}
+                taskId={count}
             />
 
         </View>
@@ -119,14 +127,14 @@ const styles = StyleSheet.create({
         // flexDirection: 'row',
         justifyContent: 'space-between',
         // alignItems: 'center',
-        backgroundColor: '#FFFFF1',
+        backgroundColor: '#fdfaff',
     },
     taskContainer: {
         margin: 3,
         // maxHeight: 250,
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: '#585858',
+        borderColor: '#321e45',
     },
     instructions: {
         textAlign: 'center',
@@ -138,7 +146,7 @@ const styles = StyleSheet.create({
         margin: 16,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FF4081'
+        backgroundColor: '#4a2370'
     },
 });
 
@@ -151,10 +159,11 @@ const task = StyleSheet.create({
     },
     contentTitle: {
         fontSize: 18,
+        color: '#321e45',
     },
     contentSummary: {
         fontSize: 12,
-        color: '#383838',
+        color: '#321e45',
     },
 });
 
