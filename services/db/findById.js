@@ -18,8 +18,8 @@ const getTask = async (db, id) => {
         };
     }
 
-    console.log(task);
-    console.log('from find by id');
+    // console.log(task);
+    // console.log('from find by id');
     return task;
 
 };

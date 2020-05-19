@@ -5,11 +5,12 @@ import {View, Text, StyleSheet, TouchableHighlight, FlatList} from 'react-native
 import { connect, useSelector } from 'react-redux';
 import { FAB } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
-import { getData } from '../services/localStorage';
+// import { getData } from '../services/localStorage';
 import { changeCount } from '../redux/actions/counts';
 import { setAllTasks } from '../redux/actions/allTasks';
+// import { storeData } from '../services/localStorage';
 
-// import db from '../db/tasks';
+import dbStore from '../db/tasks';
 
 // const DeviceWidth = Dimensions.get('window').width;
 
@@ -64,7 +65,6 @@ function HomeScreen({ navigation, dispatch }) {
     const taskObject = useSelector(state => state);
     const { allTasks: db } = taskObject.allTasks;
     const { count } = taskObject.count;
-    console.log(count);
 
     // const [db, setDb] = React.useState([]);
 
@@ -76,10 +76,11 @@ function HomeScreen({ navigation, dispatch }) {
 
                 if (db.length) return;
 
-                const response = await getData();
+                // const response = await getData();
 
                 // ... get avavilable tasks from localStorage
-                dispatch(setAllTasks(response));
+                // dispatch(setAllTasks(response));
+                dispatch(setAllTasks(dbStore));
                 // ...
             }
             fetchData().then();
@@ -122,7 +123,7 @@ function HomeScreen({ navigation, dispatch }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        padding: 4,
         alignContent: 'space-between',
         // flexDirection: 'row',
         justifyContent: 'space-between',
