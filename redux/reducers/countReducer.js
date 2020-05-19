@@ -1,11 +1,11 @@
-import { COUNTER_CHANGE } from '../constants';
+import { TASK_ID_COUNTER } from '../constants';
 
 const initialState = {
-    count: 0
+    count: 400
 };
 const countReducer = (state = initialState, action) => {
     switch(action.type) {
-        case COUNTER_CHANGE:
+        case TASK_ID_COUNTER:
             return {
                 ...state,
                 count:action.payload
