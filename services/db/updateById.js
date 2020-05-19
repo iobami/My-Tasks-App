@@ -4,9 +4,6 @@ const updateTaskById = async (db, id, newTask) => {
 
     if (!db.length) return null;
 
-    console.log(id);
-    console.log(newTask);
-
     await db.forEach((taskObject) => {
         if (taskObject.id === id) {
             checkNewTask = false;
