@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {View, Text, StyleSheet, TouchableHighlight, FlatList} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight, FlatList, Dimensions} from 'react-native';
 import { connect, useSelector } from 'react-redux';
 import { FAB } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
@@ -12,7 +12,7 @@ import { setAllTasks } from '../redux/actions/allTasks';
 
 import dbStore from '../db/tasks';
 
-// const DeviceWidth = Dimensions.get('window').width;
+const ScreenWidth = Dimensions.get('window').width;
 
 const goToTask = (navigation, name, task) => {
     // console.log(task);
@@ -43,12 +43,18 @@ function Tasks({ taskObject, navigation }) {
             underlayColor="white"
             onPress={() => goToTask(navigation, 'Task', taskObject)}
         >
-            <View style={task.content}>
-                <Text style={task.contentTitle}>{ taskObject.title }
-                    {"\n"}
-                    {"\n"}
-                </Text>
-                <Text style={task.contentSummary}>
+            <View
+             style={task.content}
+             >
+                {taskObject.title !== ''
+                    ? <Text style={task.contentTitle}>{ taskObject.title }</Text>
+                    : null
+                }
+                <Text
+                 style={task.contentSummary}
+                 ellipsizeMode='tail'
+                 numberOfLines={8}
+                >
                     { taskObject.description }
                 </Text>
             </View>
@@ -57,6 +63,8 @@ function Tasks({ taskObject, navigation }) {
 }
 
 function HomeScreen({ navigation, dispatch }) {
+
+    // console.log(ScreenWidth);
 
     /**
      * useSelector to get state and set all tasks into const db
